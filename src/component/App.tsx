@@ -1,11 +1,14 @@
+import { Container, Box, Typography } from '@material-ui/core';
 import React from 'react';
 
-function App() {
+export function App(): JSX.Element {
     return (
-        <>
-            App
-        </>
-    );
+        <Container maxWidth="sm">
+            <Box sx={{ my: 4 }}>
+                <Typography variant="h4" component="h1" gutterBottom>
+                    The Movie Database
+                </Typography>
+            </Box>
+        </Container>
+    )
 }
-
-export default App;
