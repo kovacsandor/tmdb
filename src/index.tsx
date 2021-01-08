@@ -3,11 +3,29 @@ import ReactDOM from 'react-dom';
 import { App } from './component/App';
 import reportWebVitals from './reportWebVitals';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { ApolloProvider } from '@apollo/client';
+import { defaultDataIdFromObject, ApolloClient, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+    uri: 'https://cors-anywhere.herokuapp.com/https://tmdb.apps.quintero.io/',
+    cache: new InMemoryCache({
+        dataIdFromObject(responseObject) {
+            switch (responseObject.__typename) {
+                case 'Movies':
+                    return JSON.stringify(responseObject);
+                default:
+                    return defaultDataIdFromObject(responseObject);
+            }
+        }
+    }),
+});
 
 ReactDOM.render(
     <React.StrictMode>
-        <CssBaseline/>
-        <App />
+        <CssBaseline />
+        <ApolloProvider client={client}>
+            <App />
+        </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
