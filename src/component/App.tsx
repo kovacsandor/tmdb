@@ -1,11 +1,20 @@
-import { CircularProgress, Container, Box, Typography, Button } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Alert, Box, CircularProgress, Container, Typography } from '@material-ui/core';
+import React, { KeyboardEvent, useState } from 'react';
 import { useSearchMoviesQuery } from '../hook/useSearchMoviesQuery';
+import { ControlledTextField } from './ControlledTextField';
 
 export function App(): JSX.Element {
 
-    const [term, setTerm] = useState('matrix')
-    const { loading, error, data } = useSearchMoviesQuery(term);
+    const [term, setTerm] = useState('')
+    const { loading, error, data } = useSearchMoviesQuery(term) || undefined;
+
+    function handleOnKeyUp(event: KeyboardEvent<HTMLInputElement>, value: string): void {
+
+        if (event.code === 'Enter') {
+
+            setTerm(value)
+        }
+    }
 
     return (
         <Container maxWidth='sm'>
@@ -15,17 +24,22 @@ export function App(): JSX.Element {
                 </Typography>
             </Box>
             <Box sx={{ my: 4 }}>
+                <ControlledTextField
+                    label='Search in title'
+                    handleOnKeyUp={handleOnKeyUp}
+                />
+            </Box>
+            <Box sx={{ my: 4 }}>
                 {
-                    loading
-                        ?
-                        <CircularProgress />
-                        :
-                        data?.movies.search.edges[0].node.title || error?.message
+                    loading && <CircularProgress />
+                }
+                {
+                    !loading && !!data && data.movies.search.edges[0].node.title
+                }
+                {
+                    !loading && !!error && <Alert severity="error">{error.message}</Alert>
                 }
             </Box>
-            <Button onClick={(): void => setTerm(term === 'lord of the' ? 'matrix' : 'lord of the')}>
-                Set term '{term === 'lord of the' ? 'matrix' : 'lord of the'}'
-            </Button>
         </Container>
     )
 }

@@ -1,4 +1,4 @@
-import { useQuery, gql, DocumentNode, QueryResult } from '@apollo/client';
+import { DocumentNode, gql, QueryHookOptions, QueryResult, useQuery } from '@apollo/client';
 import { ISearchMoviesQueryResultData } from '../interface/ISearchMoviesQueryResultData';
 import { ISearchMoviesQueryVariables } from '../interface/ISearchMoviesQueryVariables';
 
@@ -35,5 +35,15 @@ export function useSearchMoviesQuery(term: string): QueryResult<ISearchMoviesQue
         }
     `;
 
-    return useQuery<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables>(SEARCH_MOVIES, { variables: { term } });
+    function getQueryHookOptions(): QueryHookOptions<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables> {
+
+        return {
+            skip: !term,
+            variables: {
+                term,
+            },
+        }
+    }
+
+    return useQuery<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables>(SEARCH_MOVIES, getQueryHookOptions());
 }
