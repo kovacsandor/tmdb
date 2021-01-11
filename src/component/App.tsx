@@ -1,7 +1,11 @@
-import { Alert, Box, CircularProgress, Container, Typography } from '@material-ui/core';
+import { Alert, Box, CircularProgress, Container, Grid, Typography } from '@material-ui/core';
 import React, { KeyboardEvent, useState } from 'react';
 import { useSearchMoviesQuery } from '../hook/useSearchMoviesQuery';
+import { IEdgeTMBD } from '../interface/IEdgeTMBD';
+import { getMockSearchMoviesQueryResultData } from '../mock/getMockSearchMoviesQueryResultData';
+import { GraphQLObjectOnlyData } from '../type/GraphQLObjectOnlyData';
 import { ControlledTextField } from './ControlledTextField';
+import { Movie } from './Movie';
 
 export function App(): JSX.Element {
 
@@ -33,11 +37,24 @@ export function App(): JSX.Element {
                 {
                     loading && <CircularProgress />
                 }
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="stretch"
+                    spacing={5}
+                >
+                    {
+                        getMockSearchMoviesQueryResultData().movies.search.edges.map((edge: GraphQLObjectOnlyData<IEdgeTMBD>): JSX.Element =>
+                            <Movie edge={edge} />
+                        )
+                    }
+                </Grid>
                 {
                     !loading && !!data && data.movies.search.edges[0].node.title
                 }
                 {
-                    !loading && !!error && <Alert severity="error">{error.message}</Alert>
+                    !loading && !data && !!error && <Alert severity='error'>{error.message}</Alert>
                 }
             </Box>
         </Container>
