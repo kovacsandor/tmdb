@@ -1,14 +1,14 @@
-import { Chip } from '@material-ui/core';
-import { Card, CardMedia, CardContent, Typography, CardActions, Button, makeStyles } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardMedia, Chip, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { IZooshMovie } from '../interface/IZooshMovie';
 import { GraphQLObjectOnlyData } from '../type/GraphQLObjectOnlyData';
 
 interface IProps {
-    readonly movie: GraphQLObjectOnlyData<IZooshMovie>
+    readonly movie: GraphQLObjectOnlyData<Omit<IZooshMovie, 'similar'>>
+    readonly searchRelated: (id: number, name: string) => void
 }
 
-export function Movie({ movie: { backdrop, genres, name, releaseDate } }: IProps): JSX.Element {
+export function Movie({ movie: { backdrop, genres, id, name, releaseDate, score }, searchRelated }: IProps): JSX.Element {
 
     const useStyles = makeStyles({
         chips: {
@@ -47,7 +47,7 @@ export function Movie({ movie: { backdrop, genres, name, releaseDate } }: IProps
                     variant='h5'
                     component='div'
                 >
-                    {name}
+                    {name} ({score})
                 </Typography>
                 <Typography
                     variant='body2'
@@ -69,7 +69,12 @@ export function Movie({ movie: { backdrop, genres, name, releaseDate } }: IProps
             </CardContent>
             <CardActions>
                 <Button size='small'>Learn More</Button>
-                <Button size='small'>Related</Button>
+                <Button
+                    onClick={(): void => searchRelated(id, name)}
+                    size='small'
+                >
+                    Related
+                </Button>
             </CardActions>
         </Card>
     )

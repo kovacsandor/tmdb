@@ -7,10 +7,11 @@ import { IZooshSocialMedia } from './IZooshSocialMedia';
 export interface IZooshMovie extends IGraphQLObject<'Movie'> {
     readonly backdrop: IZooshBackdrop;
     readonly genres: IZooshGenre[];
-    readonly id: string;
+    readonly id: number;
     readonly name: string;
     readonly releaseDate: string;
     readonly score: number;
+    readonly similar: Omit<IZooshMovie, 'similar'>[];
     readonly socialMedia: IZooshSocialMedia;
     readonly tagline: string;
     readonly votes: number;
