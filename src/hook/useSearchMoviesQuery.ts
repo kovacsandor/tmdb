@@ -2,35 +2,27 @@ import { DocumentNode, gql, QueryHookOptions, QueryResult, useQuery } from '@apo
 import { ISearchMoviesQueryResultData } from '../interface/ISearchMoviesQueryResultData';
 import { ISearchMoviesQueryVariables } from '../interface/ISearchMoviesQueryVariables';
 
-
-export function useSearchMoviesQuery(term: string): QueryResult<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables> {
+export function useSearchMoviesQuery(query: string): QueryResult<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables> {
 
     const SEARCH_MOVIES: DocumentNode = gql`
-        query ($term: String!) {
-            movies {
-                search(term: $term, first: 10) {
-                    edges {
-                        node {
-                            backdrop(size: W300)
-                            details {
-                                genres {
-                                    id
-                                    name
-                                }
-                                tagline
-                            }
-                            externalIds {
-                                imdb
-                            }
-                            id
-                            numberOfRatings
-                            rating
-                            releaseDate
-                            title
-                        }
-                    }
-                    totalCount
+        query SearchMovies ($query: String!) {
+            searchMovies(page: 1, query: $query) {
+                backdrop {
+                    small
                 }
+                genres {
+                    id
+                    name
+                }
+                id
+                name
+                releaseDate
+                score
+                socialMedia {
+                    imdb
+                }
+                tagline
+                votes
             }
         }
     `;
@@ -38,9 +30,9 @@ export function useSearchMoviesQuery(term: string): QueryResult<ISearchMoviesQue
     function getQueryHookOptions(): QueryHookOptions<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables> {
 
         return {
-            skip: !term,
+            skip: !query,
             variables: {
-                term,
+                query,
             },
         }
     }

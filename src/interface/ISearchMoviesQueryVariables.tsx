@@ -1,3 +1,3 @@
 export interface ISearchMoviesQueryVariables {
-    readonly term: string
+    readonly query: string
 }

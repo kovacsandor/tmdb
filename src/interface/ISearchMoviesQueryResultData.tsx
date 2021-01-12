@@ -1,5 +1,5 @@
-import { IMoviesTMBD } from './IMoviesTMBD';
+import { IZooshMovie } from './IZooshMovie';
 
 export interface ISearchMoviesQueryResultData {
-    readonly movies: IMoviesTMBD
+    readonly searchMovies: IZooshMovie[]
 }

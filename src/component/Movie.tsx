@@ -1,14 +1,14 @@
 import { Chip } from '@material-ui/core';
 import { Card, CardMedia, CardContent, Typography, CardActions, Button, makeStyles } from '@material-ui/core';
 import React from 'react';
-import { IEdgeTMBD } from '../interface/IEdgeTMBD';
+import { IZooshMovie } from '../interface/IZooshMovie';
 import { GraphQLObjectOnlyData } from '../type/GraphQLObjectOnlyData';
 
 interface IProps {
-    readonly edge: GraphQLObjectOnlyData<IEdgeTMBD>
+    readonly movie: GraphQLObjectOnlyData<IZooshMovie>
 }
 
-export function Movie({ edge }: IProps): JSX.Element {
+export function Movie({ movie: { backdrop, genres, name, releaseDate } }: IProps): JSX.Element {
 
     const useStyles = makeStyles({
         chips: {
@@ -33,10 +33,10 @@ export function Movie({ edge }: IProps): JSX.Element {
     return (
         <Card className={classes.root}>
             {
-                !!edge.node.backdrop && (
+                !!backdrop && (
                     <CardMedia
                         className={classes.media}
-                        image={edge.node.backdrop}
+                        image={backdrop.small}
                         title='Contemplative Reptile'
                     />
                 )
@@ -47,17 +47,17 @@ export function Movie({ edge }: IProps): JSX.Element {
                     variant='h5'
                     component='div'
                 >
-                    {edge.node.title}
+                    {name}
                 </Typography>
                 <Typography
                     variant='body2'
                     color='textSecondary'
                     component='p'
                 >
-                    {edge.node.releaseDate.slice(0, 4)}
+                    {new Date(releaseDate).getFullYear()}
                 </Typography>
                 <div className={classes.chips} >
-                    {edge.node.details.genres.map(({ id, name }) =>
+                    {genres.map(({ id, name }) =>
                         <Chip
                             color='primary'
                             key={id}

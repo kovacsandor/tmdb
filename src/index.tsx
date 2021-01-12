@@ -7,7 +7,7 @@ import { ApolloProvider } from '@apollo/client';
 import { defaultDataIdFromObject, ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
-    uri: 'https://cors-anywhere.herokuapp.com/https://tmdb.apps.quintero.io/',
+    uri: 'https://tmdb.sandbox.zoosh.ie/dev',
     cache: new InMemoryCache({
         dataIdFromObject(responseObject) {
             switch (responseObject.__typename) {

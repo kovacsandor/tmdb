@@ -1,9 +1,8 @@
 import { Alert, Box, CircularProgress, Container, Grid, Typography } from '@material-ui/core';
 import React, { KeyboardEvent, useState } from 'react';
 import { useSearchMoviesQuery } from '../hook/useSearchMoviesQuery';
-import { IEdgeTMBD } from '../interface/IEdgeTMBD';
+import { IZooshMovie } from '../interface/IZooshMovie';
 import { getMockSearchMoviesQueryResultData } from '../mock/getMockSearchMoviesQueryResultData';
-import { GraphQLObjectOnlyData } from '../type/GraphQLObjectOnlyData';
 import { ControlledTextField } from './ControlledTextField';
 import { Movie } from './Movie';
 
@@ -39,19 +38,19 @@ export function App(): JSX.Element {
                 }
                 <Grid
                     container
-                    direction="row"
-                    justifyContent="flex-start"
-                    alignItems="stretch"
+                    direction='row'
+                    justifyContent='flex-start'
+                    alignItems='stretch'
                     spacing={5}
                 >
                     {
-                        getMockSearchMoviesQueryResultData().movies.search.edges.map((edge: GraphQLObjectOnlyData<IEdgeTMBD>): JSX.Element =>
-                            <Movie edge={edge} />
+                        getMockSearchMoviesQueryResultData().searchMovies.map((movie: IZooshMovie): JSX.Element =>
+                            <Movie movie={movie} />
                         )
                     }
                 </Grid>
                 {
-                    !loading && !!data && data.movies.search.edges[0].node.title
+                    !loading && !!data && data.searchMovies[0].name
                 }
                 {
                     !loading && !data && !!error && <Alert severity='error'>{error.message}</Alert>

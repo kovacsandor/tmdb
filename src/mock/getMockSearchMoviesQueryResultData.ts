@@ -1,40 +1,37 @@
 import { ISearchMoviesQueryResultData } from '../interface/ISearchMoviesQueryResultData';
-import { GraphQLObjectOnlyData } from '../type/GraphQLObjectOnlyData';
 
-export function getMockSearchMoviesQueryResultData(): GraphQLObjectOnlyData<ISearchMoviesQueryResultData> {
+export function getMockSearchMoviesQueryResultData(): ISearchMoviesQueryResultData {
     return {
-        movies: {
-            search: {
-                edges: [
+        searchMovies: [
+            {
+                backdrop: {
+                    small: 'https://image.tmdb.org/t/p/w300/fNG7i7RqMErkcqhohV2a6cV1Ehy.jpg',
+                    __typename: 'Backdrop'
+                },
+                genres: [
                     {
-                        node: {
-                            backdrop: 'https://image.tmdb.org/t/p/w500/fNG7i7RqMErkcqhohV2a6cV1Ehy.jpg',
-                            details: {
-                                genres: [
-                                    {
-                                        id: 28,
-                                        name: 'Action'
-                                    },
-                                    {
-                                        id: 878,
-                                        name: 'Sci-fi'
-                                    },
-                                ],
-                                tagline: 'The return of the matrix'
-                            },
-                            externalIds: {
-                                imdb: 'tt0133093'
-                            },
-                            id: 603,
-                            numberOfRatings: 12345678,
-                            rating: 8.1,
-                            releaseDate: '1999-03-30',
-                            title: 'The Matrix',
-                        }
+                        id: '28',
+                        name: 'Action',
+                        __typename: 'Genre'
                     },
+                    {
+                        id: '878',
+                        name: 'Science Fiction',
+                        __typename: 'Genre'
+                    }
                 ],
-                totalCount: 45
+                id: '603',
+                name: 'The Matrix',
+                releaseDate: '1999-03-30T00:00:00.000Z',
+                score: 8.1,
+                socialMedia: {
+                    imdb: null,
+                    __typename: 'SocialMedia'
+                },
+                tagline: 'Welcome to the Real World.',
+                votes: 18439,
+                __typename: 'Movie'
             }
-        }
+        ]
     }
 }
