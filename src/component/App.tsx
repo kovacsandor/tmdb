@@ -2,7 +2,6 @@ import { Alert, Box, CircularProgress, Container, Grid, Typography } from '@mate
 import React, { KeyboardEvent, useState } from 'react';
 import { useSearchMoviesQuery } from '../hook/useSearchMoviesQuery';
 import { IZooshMovie } from '../interface/IZooshMovie';
-import { getMockSearchMoviesQueryResultData } from '../mock/getMockSearchMoviesQueryResultData';
 import { ControlledTextField } from './ControlledTextField';
 import { Movie } from './Movie';
 
@@ -36,21 +35,22 @@ export function App(): JSX.Element {
                 {
                     loading && <CircularProgress />
                 }
-                <Grid
-                    container
-                    direction='row'
-                    justifyContent='flex-start'
-                    alignItems='stretch'
-                    spacing={5}
-                >
-                    {
-                        getMockSearchMoviesQueryResultData().searchMovies.map((movie: IZooshMovie): JSX.Element =>
-                            <Movie movie={movie} />
-                        )
-                    }
-                </Grid>
                 {
-                    !loading && !!data && data.searchMovies[0].name
+                    !loading && !!data && (
+                        <Grid
+                            container
+                            direction='row'
+                            justifyContent='flex-start'
+                            alignItems='stretch'
+                            spacing={5}
+                        >
+                            {
+                                data.searchMovies.map((movie: IZooshMovie): JSX.Element =>
+                                    <Movie movie={movie} />
+                                )
+                            }
+                        </Grid>
+                    )
                 }
                 {
                     !loading && !data && !!error && <Alert severity='error'>{error.message}</Alert>

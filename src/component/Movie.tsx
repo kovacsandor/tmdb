@@ -21,7 +21,7 @@ export function Movie({ movie: { backdrop, genres, name, releaseDate } }: IProps
         },
         root: {
             margin: '5px',
-            maxWidth: 345,
+            maxWidth: 187,
         },
         media: {
             height: 140,
