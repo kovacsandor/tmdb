@@ -1,6 +1,6 @@
-import { DocumentNode, gql, QueryHookOptions, QueryResult, useQuery } from '@apollo/client';
-import { ISearchMoviesQueryResultData } from '../interface/ISearchMoviesQueryResultData';
-import { ISearchMoviesQueryVariables } from '../interface/ISearchMoviesQueryVariables';
+import { DocumentNode, gql, QueryHookOptions, QueryResult, useQuery } from '@apollo/client'
+import { ISearchMoviesQueryResultData } from '../interface/ISearchMoviesQueryResultData'
+import { ISearchMoviesQueryVariables } from '../interface/ISearchMoviesQueryVariables'
 
 export function useSearchMoviesQuery(query: string): QueryResult<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables> {
 
@@ -25,7 +25,7 @@ export function useSearchMoviesQuery(query: string): QueryResult<ISearchMoviesQu
                 votes
             }
         }
-    `;
+    `
 
     function getQueryHookOptions(): QueryHookOptions<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables> {
 
@@ -37,5 +37,5 @@ export function useSearchMoviesQuery(query: string): QueryResult<ISearchMoviesQu
         }
     }
 
-    return useQuery<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables>(SEARCH_MOVIES, getQueryHookOptions());
+    return useQuery<ISearchMoviesQueryResultData, ISearchMoviesQueryVariables>(SEARCH_MOVIES, getQueryHookOptions())
 }

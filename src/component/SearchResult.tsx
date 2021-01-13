@@ -1,8 +1,8 @@
-import { ApolloError } from '@apollo/client/errors';
-import { Alert, CircularProgress, Grid } from '@material-ui/core';
-import React from 'react';
-import { IZooshMovie } from '../interface/IZooshMovie';
-import { Movie } from './Movie';
+import { ApolloError } from '@apollo/client/errors'
+import { Alert, CircularProgress, Grid } from '@material-ui/core'
+import React from 'react'
+import { IZooshMovie } from '../interface/IZooshMovie'
+import { Movie } from './Movie'
 
 interface IProps<T> {
     readonly data: T | undefined
@@ -31,6 +31,7 @@ export function SearchResult<T>({ getMovies, data, error, loading, searchRelated
                         {
                             getMovies(data).map((movie: Omit<IZooshMovie, 'similar'>): JSX.Element =>
                                 <Movie
+                                    key={movie.id}
                                     movie={movie}
                                     searchRelated={searchRelated}
                                 />

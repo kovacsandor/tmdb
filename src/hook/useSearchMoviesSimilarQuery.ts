@@ -1,6 +1,6 @@
-import { DocumentNode, gql, QueryHookOptions, QueryResult, useQuery } from '@apollo/client';
-import { ISearchMoviesSimilarQueryResultData } from '../interface/ISearchMoviesSimilarQueryResultData';
-import { ISearchMoviesSimilarQueryVariables } from '../interface/ISearchMoviesSimilarQueryVariables';
+import { DocumentNode, gql, QueryHookOptions, QueryResult, useQuery } from '@apollo/client'
+import { ISearchMoviesSimilarQueryResultData } from '../interface/ISearchMoviesSimilarQueryResultData'
+import { ISearchMoviesSimilarQueryVariables } from '../interface/ISearchMoviesSimilarQueryVariables'
 
 export function useSearchMoviesSimilarQuery(id: number): QueryResult<ISearchMoviesSimilarQueryResultData, ISearchMoviesSimilarQueryVariables> {
 
@@ -30,7 +30,7 @@ export function useSearchMoviesSimilarQuery(id: number): QueryResult<ISearchMovi
                 }
             }
         }        
-    `;
+    `
 
     function getQueryHookOptions(): QueryHookOptions<ISearchMoviesSimilarQueryResultData, ISearchMoviesSimilarQueryVariables> {
 
@@ -41,5 +41,5 @@ export function useSearchMoviesSimilarQuery(id: number): QueryResult<ISearchMovi
         }
     }
 
-    return useQuery<ISearchMoviesSimilarQueryResultData, ISearchMoviesSimilarQueryVariables>(SEARCH_MOVIES_SIMILAR, getQueryHookOptions());
+    return useQuery<ISearchMoviesSimilarQueryResultData, ISearchMoviesSimilarQueryVariables>(SEARCH_MOVIES_SIMILAR, getQueryHookOptions())
 }

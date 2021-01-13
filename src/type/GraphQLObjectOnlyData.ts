@@ -1,4 +1,4 @@
-import { IGraphQLObject } from '../interface/IGraphQLObject';
+import { IGraphQLObject } from '../interface/IGraphQLObject'
 
 export type GraphQLObjectOnlyData<T> = Omit<{
     readonly [P in keyof T]: (

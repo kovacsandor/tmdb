@@ -1,7 +1,7 @@
-import { Box, Container, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
-import { Search } from './Search';
-import { SearchRelated } from './SearchRelated';
+import { Box, Container, Typography } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Search } from './Search'
+import { SearchRelated } from './SearchRelated'
 
 export function App(): JSX.Element {
 

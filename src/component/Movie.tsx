@@ -1,14 +1,17 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Chip, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
-import { IZooshMovie } from '../interface/IZooshMovie';
-import { GraphQLObjectOnlyData } from '../type/GraphQLObjectOnlyData';
+import { Button, Card, CardActions, CardContent, CardMedia, Chip, makeStyles, Typography } from '@material-ui/core'
+import React, { useState } from 'react'
+import { IZooshMovie } from '../interface/IZooshMovie'
+import { GraphQLObjectOnlyData } from '../type/GraphQLObjectOnlyData'
+import { MovieDetails } from './MovieDetails'
 
 interface IProps {
     readonly movie: GraphQLObjectOnlyData<Omit<IZooshMovie, 'similar'>>
     readonly searchRelated: (id: number, name: string) => void
 }
 
-export function Movie({ movie: { backdrop, genres, id, name, releaseDate, score }, searchRelated }: IProps): JSX.Element {
+export function Movie({ movie: { backdrop, genres, id, name, releaseDate, score, socialMedia: { imdb } }, searchRelated }: IProps): JSX.Element {
+
+    const [open, setOpen] = useState<boolean>(false)
 
     const useStyles = makeStyles({
         chips: {
@@ -26,9 +29,9 @@ export function Movie({ movie: { backdrop, genres, id, name, releaseDate, score 
         media: {
             height: 140,
         },
-    });
+    })
 
-    const classes = useStyles();
+    const classes = useStyles()
 
     return (
         <Card className={classes.root}>
@@ -68,7 +71,12 @@ export function Movie({ movie: { backdrop, genres, id, name, releaseDate, score 
                 </div>
             </CardContent>
             <CardActions>
-                <Button size='small'>Learn More</Button>
+                <Button
+                    onClick={(): void => setOpen(true)}
+                    size='small'
+                >
+                    Learn More
+                    </Button>
                 <Button
                     onClick={(): void => searchRelated(id, name)}
                     size='small'
@@ -76,6 +84,15 @@ export function Movie({ movie: { backdrop, genres, id, name, releaseDate, score 
                     Related
                 </Button>
             </CardActions>
+            {
+                open && (
+                    <MovieDetails
+                        imdb={imdb}
+                        name={name}
+                        onClose={() => setOpen(false)}
+                    />
+                )
+            }
         </Card>
     )
 }

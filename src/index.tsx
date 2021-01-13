@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { App } from './component/App';
-import reportWebVitals from './reportWebVitals';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ApolloProvider } from '@apollo/client';
-import { defaultDataIdFromObject, ApolloClient, InMemoryCache } from '@apollo/client';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { App } from './component/App'
+import reportWebVitals from './reportWebVitals'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { ApolloProvider } from '@apollo/client'
+import { defaultDataIdFromObject, ApolloClient, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({
     uri: 'https://tmdb.sandbox.zoosh.ie/dev',
@@ -12,13 +12,13 @@ const client = new ApolloClient({
         dataIdFromObject(responseObject) {
             switch (responseObject.__typename) {
                 case 'Movies':
-                    return JSON.stringify(responseObject);
+                    return JSON.stringify(responseObject)
                 default:
-                    return defaultDataIdFromObject(responseObject);
+                    return defaultDataIdFromObject(responseObject)
             }
         }
     }),
-});
+})
 
 ReactDOM.render(
     <React.StrictMode>
@@ -28,9 +28,9 @@ ReactDOM.render(
         </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')
-);
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals()

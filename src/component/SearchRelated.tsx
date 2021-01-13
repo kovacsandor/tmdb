@@ -1,9 +1,9 @@
-import { Box } from '@material-ui/core';
-import React from 'react';
-import { useSearchMoviesSimilarQuery } from '../hook/useSearchMoviesSimilarQuery';
-import { ISearchMoviesSimilarQueryResultData } from '../interface/ISearchMoviesSimilarQueryResultData';
-import { IZooshMovie } from '../interface/IZooshMovie';
-import { SearchResult } from './SearchResult';
+import { Box } from '@material-ui/core'
+import React from 'react'
+import { useSearchMoviesSimilarQuery } from '../hook/useSearchMoviesSimilarQuery'
+import { ISearchMoviesSimilarQueryResultData } from '../interface/ISearchMoviesSimilarQueryResultData'
+import { IZooshMovie } from '../interface/IZooshMovie'
+import { SearchResult } from './SearchResult'
 
 interface IProps {
     readonly id: number
@@ -13,7 +13,7 @@ interface IProps {
 
 export function SearchRelated({ id, name, searchRelated }: IProps): JSX.Element {
 
-    const { loading, error, data } = useSearchMoviesSimilarQuery(id);
+    const { loading, error, data } = useSearchMoviesSimilarQuery(id)
 
     return (
         <>

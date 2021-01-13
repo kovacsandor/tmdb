@@ -1,5 +1,5 @@
-import { TextField } from '@material-ui/core';
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { TextField } from '@material-ui/core'
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 interface IProps {
     readonly handleOnKeyUp: (event: KeyboardEvent<HTMLInputElement>, value: string) => void

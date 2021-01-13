@@ -1,11 +1,11 @@
-import { Box } from '@material-ui/core';
-import React, { KeyboardEvent } from 'react';
-import { useState } from 'react';
-import { useSearchMoviesQuery } from '../hook/useSearchMoviesQuery';
-import { ISearchMoviesQueryResultData } from '../interface/ISearchMoviesQueryResultData';
-import { IZooshMovie } from '../interface/IZooshMovie';
-import { ControlledTextField } from './ControlledTextField';
-import { SearchResult } from './SearchResult';
+import { Box } from '@material-ui/core'
+import React, { KeyboardEvent } from 'react'
+import { useState } from 'react'
+import { useSearchMoviesQuery } from '../hook/useSearchMoviesQuery'
+import { ISearchMoviesQueryResultData } from '../interface/ISearchMoviesQueryResultData'
+import { IZooshMovie } from '../interface/IZooshMovie'
+import { ControlledTextField } from './ControlledTextField'
+import { SearchResult } from './SearchResult'
 
 interface IProps {
     readonly searchRelated: (id: number, name: string) => void
@@ -15,7 +15,7 @@ interface IProps {
 export function Search({ searchRelated, setRelatedInitial }: IProps): JSX.Element {
 
     const [query, setQuery] = useState<string>('')
-    const { loading, error, data } = useSearchMoviesQuery(query);
+    const { loading, error, data } = useSearchMoviesQuery(query)
 
     function handleOnKeyUp(event: KeyboardEvent<HTMLInputElement>, value: string): void {
 
